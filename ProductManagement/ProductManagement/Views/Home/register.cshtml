@@ -1,0 +1,72 @@
+﻿@model ProductManagement.Models.Tbl_Users
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Registration</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #aed8d8;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top"> <center><h2 style="color:white">User Registration</h2></center></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <center> <h2 style="color:red">User Registration</h2></center>
+                @if (ViewBag.msg != null)
+                {
+                    <div class="alert alert-danger" style="margin-left:470px;text-align:center">
+                        <strong>@ViewBag.msg</strong>
+                    </div>
+                }
+                <div class="container" style="width:40%">
+                    <br />
+                    <br />
+                    @using (@Html.BeginForm("register", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="form-group" style="margin-left:240px;width:100%;">
+                            <label for="email">Email:</label><strong style="color:red;margin-left:4px;font-weight:bold">*</strong>
+                            @Html.TextBoxFor(x => x.User_Email, htmlAttributes: new { @class = "form-control", required = "required" })
+                        </div>
+                        <div class="form-group" style="margin-left:240px;width:100%;">
+                            <label for="pwd">Password:</label><strong style="color:red;margin-left:4px;font-weight:bold">*</strong>
+                            @Html.PasswordFor(x => x.User_Password, new { @class = "form-control", required = "required" })
+                        </div>
+                        <div class="form-group" style="margin-left:240px;width:100%;">
+                            <label for="name">User Name:</label><strong style="color:red;margin-left:4px;font-weight:bold">*</strong>
+                            @Html.TextBoxFor(x => x.User_Name, new { @class = "form-control", required = "required" })
+                        </div>
+                        <div class="form-group" style="margin-left:240px;width:100%;">
+                            <label for="file">Image:</label>
+                            <input type="file" class="form-control btn btn-info" id="profile" name="profile" />
+                        </div>
+                        <br />
+                        <input type="submit" value="Register Now!" style="margin-left:240px;width:100%;" class="btn btn-danger btn-block" />
+
+                    }
+                </div>
+                <div style="margin-top:-300px;margin-left:900px;">
+
+                    <img src="~/Content/images/4.png" />
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

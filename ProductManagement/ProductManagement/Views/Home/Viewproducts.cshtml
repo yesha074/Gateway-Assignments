@@ -1,0 +1,93 @@
+﻿@*@model IEnumerable<ProductManagement.Models.Tbl_Products>*@
+@model PagedList.IPagedList<ProductManagement.Models.Tbl_Products>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Viewproducts";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+
+}
+<div class="navbar navbar-inverse" style="width:88%;margin-top:-88px;"> <center><h2 style="color:white">View Products</h2></center></div>
+@if (@TempData["msg"] != null)
+{
+    <div class="alert alert-success" style="text-align:center">
+        <strong>@TempData["msg"]</strong>
+    </div>
+}
+
+@using (Html.BeginForm("Viewproducts", "Home", FormMethod.Get))
+{
+    <p style="margin-left:520px;color:darkslategray;font-weight:bold;height:40px;">
+        Search Your Products:&nbsp;&nbsp;&nbsp;@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)&nbsp;&nbsp;
+        <input type="submit" value="Search" class="form-control btn btn-warning" style="height:35px;margin-bottom:3px;width:70px;" />
+    </p>
+}
+<h5 style="margin-left:10px;font-weight:bold;margin-top:-39px;">
+    @Html.ActionLink("Short By Product Name", "Viewproducts", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Short By Price", "Viewproducts", new { sortOrder = ViewBag.PriceSortParm, currentFilter = ViewBag.CurrentFilter })
+</h5>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Image
+        </th>
+        <th>
+            Category
+        </th>
+        <th></th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.P_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P_Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P_Qty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P_Short_Description)
+            </td>
+            <td>
+                <img alt="photo" style="height:60px; width:60px;"
+                     src="@Url.Content(item.P_SImage)" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tbl_Category.C_Name)
+            </td>
+            <td>
+                <input type="button" class="btn-info" style="margin-left:-30px;height:34px;margin-top:-20px;width:100px;border-radius:5px;" value="Update" onclick="window.location.href='@Url.Action("Edit","Home", new { id = item.P_Id } )';" />
+
+                <input type="button" class="btn-danger" style="margin-left:10px;height:34px;margin-top:2px;width:100px;border-radius:5px;" value="Delete" onclick="window.location.href='@Url.Action("Delete","Home", new { id = item.P_Id } )';" />
+
+              
+            </td>
+        </tr>
+    }
+
+</table>
+<div style="margin-left:800px;">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Viewproducts",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

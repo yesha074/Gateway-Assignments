@@ -1,0 +1,108 @@
+﻿@model ProductManagement.Models.Tbl_Products
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div class="navbar navbar-inverse" style="width:88%;margin-top:-88px;"> <center><h2 style="color:white">Update Product</h2></center></div>
+
+<center><h3 style="color:green;font-family:'Arial Rounded MT'">@TempData["msg"]</h3></center>
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.P_Id)
+
+    <div class="form-group">
+        <label for="cat" class="control-label col-md-2">Product Name:<strong style="color:red;margin-left:10px;font-weight:bold">*</strong></label>
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.P_Name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(model => model.P_Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name" class="control-label col-md-2">Price:<strong style="color:red;margin-left:10px;font-weight:bold">*</strong></label>
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.P_Price, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(model => model.P_Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name" class="control-label col-md-2">Quantity:<strong style="color:red;margin-left:10px;font-weight:bold">*</strong></label>
+        <div class="col-md-8">
+
+            @{
+                var domainsList = new SelectList(new[]
+                {
+                    new SelectListItem { Text = "1", Value = "1", Selected = true },
+                    new SelectListItem { Text = "2", Value = "2"},
+                    new SelectListItem { Text = "3", Value = "3"},
+                    new SelectListItem { Text = "4", Value = "4"},
+                    new SelectListItem { Text = "5", Value = "5"},
+                    new SelectListItem { Text = "6", Value = "6"},
+                    new SelectListItem { Text = "7", Value = "7"},
+                    new SelectListItem { Text = "8", Value = "8"},
+                    new SelectListItem { Text = "9", Value = "9"},
+                    new SelectListItem { Text = "10", Value = "10"},
+                }, "Value", "Text");
+            }
+            @Html.DropDownList("P_Qty", domainsList, "--Select Quantity--", htmlAttributes: new { @class = "form-control", required = "required" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="cat" class="control-label col-md-2">Product Category:<strong style="color:red;margin-left:10px;font-weight:bold">*</strong></label>
+        <div class="col-md-8">
+            @Html.DropDownList("P_Fkey_Cid", ViewBag.list as SelectList, "--Select Category--", htmlAttributes: new { @class = "form-control", required = "required" })
+            @Html.ValidationMessageFor(model => model.P_Fkey_Cid, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name" class="control-label col-md-2">Short Description:<strong style="color:red;margin-left:10px;font-weight:bold">*</strong></label>
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.P_Short_Description, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(model => model.P_Short_Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name" class="control-label col-md-2">Long Description:<strong style="color:red;margin-left:15px;font-weight:bold"></strong></label>
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.P_Long_Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.P_Long_Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group col-md-8">
+        <label for="file" style="margin-left:60px;margin-top:15px;">Short Image:</label>
+        <strong style="color:red;margin-left:8px;font-weight:bold">*</strong>
+        <img alt="photo" style="height:40px; width:40px;margin-left:30px;" src="@Url.Content(Model.P_SImage)" />
+        <input type="file" style="margin-left:270px;margin-top:-38px;width:40%;" class="form-control btn btn-info" id="imgfile" name="imgfile" />
+    </div>
+    <br />
+    <br />
+    <br />
+
+    <div class="form-group col-md-8">
+        <label for="file" style="margin-left:60px;margin-top:15px;">Large Image:</label>
+        <img alt="photo" style="height:60px; width:60px;margin-left:45px;" src="@Url.Content(Model.P_LImage)" />
+        <input type="file" style="margin-left:270px;margin-top:-48px;width:40%;" class="form-control btn btn-info" id="imgfile1" name="imgfile1" />
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+            <input type="submit" style="margin-left:40px;border-radius:5px;" value="Update Product" class="btn btn-danger" />
+            <input type="button" class="btn-danger" style="margin-left:20px;height:34px;margin-top:30px;width:125px;border-radius:5px;" value="Cancel" onclick="window.location.href='@Url.Action("Viewproducts","Home" )';" />
+        </div>
+    </div>
+</div>
+}
+

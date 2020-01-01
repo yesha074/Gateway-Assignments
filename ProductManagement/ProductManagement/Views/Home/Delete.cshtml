@@ -1,0 +1,97 @@
+﻿@model ProductManagement.Models.Tbl_Products
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div class="navbar navbar-inverse" style="width:88%;margin-top:-88px;"> <center><h2 style="color:white">Delete Product</h2></center></div>
+ 
+<h3 style="font-family:'Arial Rounded MT';color:red;margin-left:250px">Are you sure you want to delete this  <b>Product</b>?</h3>
+<div>
+
+
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt style="margin-left:340px;">
+            <label>Product Name:</label>&nbsp;&nbsp;&nbsp;
+        </dt>
+
+        <dd style="margin-left:20px;">
+            @Html.DisplayFor(model => model.P_Name)
+        </dd>
+
+        <dt style="margin-left:340px;margin-top:18px">
+            <label>Price:</label>&nbsp;&nbsp;&nbsp;
+        </dt>
+
+        <dd style="margin-top:18px">
+            @Html.DisplayFor(model => model.P_Price)
+        </dd>
+
+        <dt style="margin-left:340px;margin-top:18px">
+            <label>Quantity:</label>&nbsp;&nbsp;&nbsp;
+        </dt>
+
+        <dd style="margin-top:18px">
+            @Html.DisplayFor(model => model.P_Qty)
+        </dd>
+
+        <dt style="margin-left:340px;margin-top:18px">
+            <label>Short Description:</label>&nbsp;&nbsp;&nbsp;
+        </dt>
+
+        <dd style="margin-top:18px">
+            @Html.DisplayFor(model => model.P_Short_Description)
+        </dd>
+
+        <dt style="margin-left:340px;margin-top:18px">
+            <label>Long Description:</label>&nbsp;&nbsp;&nbsp;
+        </dt>
+
+        <dd style="margin-top:18px">
+            @Html.DisplayFor(model => model.P_Long_Description)
+        </dd>
+
+        <dt style="margin-left:340px;margin-top:36px;">
+            <label>Small Image:</label>&nbsp;&nbsp;&nbsp;
+        </dt>
+
+        <dd style="margin-top:20px;">
+            <img alt="photo" style="height:60px; width:60px;"
+                 src="@Url.Content(Model.P_SImage)" />
+
+        </dd>
+
+        <dt style="margin-left:340px;margin-top:36px;">
+            <label>Large Image:</label>&nbsp;&nbsp;&nbsp;
+        </dt>
+
+        <dd style="margin-top:20px;">
+            <img alt="photo" style="height:60px; width:60px;"
+                 src="@Url.Content(Model.P_LImage)" />
+
+        </dd>
+
+        <dt style="margin-left:340px;margin-top:20px;">
+            <label>Product Category:</label>&nbsp;&nbsp;&nbsp;
+        </dt>
+
+        <dd style="margin-top:20px">
+            @Html.DisplayFor(model => model.Tbl_Category.C_Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" style="margin-left:385px;border-radius:5px;width:100px;" value="Delete" class="btn btn-danger" />
+            <input type="button" class="btn-danger" style="margin-left:20px;height:34px;margin-top:15px;width:100px;border-radius:5px;" value="Cancel" onclick="window.location.href='@Url.Action("Viewproducts","Home" )';" />
+        </div>
+    }
+
+</div>

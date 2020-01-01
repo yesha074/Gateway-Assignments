@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+     <style>
+        body {
+            background-color:beige;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="height:900px;border:1px solid beige;background-color:gray">
+            <div style="width:225px;" class="container list-group checkbox">
+                <div class="list-group-item" style="background-color:cornsilk;color:white;font-weight:bold;">
+                    @Html.ActionLink("Dashboard", "Dashboard", new { @class = "list-group-item" })
+                </div>
+                <div class="list-group-item" style="background-color:cornsilk;color:white;font-weight:bold;">
+                    @Html.ActionLink("Add / View Category", "Addcat", new { @class = "list-group-item" })
+                </div>
+                <div class="list-group-item" style="background-color:cornsilk;color:white;font-weight:bold">
+                    @Html.ActionLink("Add Product", "addproduct", new { @class = "list-group-item" })
+                </div>
+                <div class="list-group-item" style="background-color:cornsilk;color:white;font-weight:bold">
+                    @Html.ActionLink("Product List", "Viewproducts", new { @class = "list-group-item" })
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="height:900px;border:1px solid white;">
+            <img src="../../Content/images/8.png" style="height:6%;width:5%;margin-left:1000px;" />
+            <h5 style="color:white;margin-left:1007px;">@Html.ActionLink("Logout", "logout", "Home")</h5>
+            @RenderBody()
+        </div>
+    </div>
+
+</body>
+</html>

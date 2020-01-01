@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="productmanagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_Category">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="C_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="C_Fkey_Uid" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_Products">
+          <Key>
+            <PropertyRef Name="P_Id" />
+          </Key>
+          <Property Name="P_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="P_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="P_Price" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="P_Qty" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="P_Short_Description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="P_Long_Description" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="P_SImage" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="P_LImage" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="P_Fkey_Cid" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_Users">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_Password" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="User_Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="User_Image" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK__Tbl_Categ__C_Fke__5165187F">
+          <End Role="Tbl_Users" Type="Self.Tbl_Users" Multiplicity="0..1" />
+          <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Users">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Category">
+              <PropertyRef Name="C_Fkey_Uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Produ__P_Fke__5441852A">
+          <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="0..1" />
+          <End Role="Tbl_Products" Type="Self.Tbl_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Category">
+              <PropertyRef Name="C_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Products">
+              <PropertyRef Name="P_Fkey_Cid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="productmanagementModelStoreContainer">
+          <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Products" EntityType="Self.Tbl_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Users" EntityType="Self.Tbl_Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Tbl_Categ__C_Fke__5165187F" Association="Self.FK__Tbl_Categ__C_Fke__5165187F">
+            <End Role="Tbl_Users" EntitySet="Tbl_Users" />
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Produ__P_Fke__5441852A" Association="Self.FK__Tbl_Produ__P_Fke__5441852A">
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+            <End Role="Tbl_Products" EntitySet="Tbl_Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="productmanagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="productmanagementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_Users" EntityType="productmanagementModel.Tbl_Users" />
+          <EntitySet Name="Tbl_Category" EntityType="productmanagementModel.Tbl_Category" />
+          <EntitySet Name="Tbl_Products" EntityType="productmanagementModel.Tbl_Products" />
+          <AssociationSet Name="FK__Tbl_Categ__C_Fke__5165187F" Association="productmanagementModel.FK__Tbl_Categ__C_Fke__5165187F">
+            <End Role="Tbl_Users" EntitySet="Tbl_Users" />
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Produ__P_Fke__5441852A" Association="productmanagementModel.FK__Tbl_Produ__P_Fke__5441852A">
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+            <End Role="Tbl_Products" EntitySet="Tbl_Products" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Tbl_Users">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="User_Password" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Category" Relationship="productmanagementModel.FK__Tbl_Categ__C_Fke__5165187F" FromRole="Tbl_Users" ToRole="Tbl_Category" />
+          <Property Name="User_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Category">
+          <Key>
+            <PropertyRef Name="C_Id" />
+          </Key>
+          <Property Name="C_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="C_Fkey_Uid" Type="Int32" />
+          <NavigationProperty Name="Tbl_Users" Relationship="productmanagementModel.FK__Tbl_Categ__C_Fke__5165187F" FromRole="Tbl_Category" ToRole="Tbl_Users" />
+          <NavigationProperty Name="Tbl_Products" Relationship="productmanagementModel.FK__Tbl_Produ__P_Fke__5441852A" FromRole="Tbl_Category" ToRole="Tbl_Products" />
+        </EntityType>
+        <EntityType Name="Tbl_Products">
+          <Key>
+            <PropertyRef Name="P_Id" />
+          </Key>
+          <Property Name="P_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="P_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="P_Price" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="P_Qty" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="P_Short_Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="P_Long_Description" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="P_SImage" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="P_LImage" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="P_Fkey_Cid" Type="Int32" />
+          <NavigationProperty Name="Tbl_Category" Relationship="productmanagementModel.FK__Tbl_Produ__P_Fke__5441852A" FromRole="Tbl_Products" ToRole="Tbl_Category" />
+        </EntityType>
+        <Association Name="FK__Tbl_Categ__C_Fke__5165187F">
+          <End Type="productmanagementModel.Tbl_Users" Role="Tbl_Users" Multiplicity="0..1" />
+          <End Type="productmanagementModel.Tbl_Category" Role="Tbl_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Users">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Category">
+              <PropertyRef Name="C_Fkey_Uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Produ__P_Fke__5441852A">
+          <End Type="productmanagementModel.Tbl_Category" Role="Tbl_Category" Multiplicity="0..1" />
+          <End Type="productmanagementModel.Tbl_Products" Role="Tbl_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Category">
+              <PropertyRef Name="C_Id" />
+            </Principal>
+            <Dependent Role="Tbl_Products">
+              <PropertyRef Name="P_Fkey_Cid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="productmanagementModelStoreContainer" CdmEntityContainer="productmanagementEntities">
+          <EntitySetMapping Name="Tbl_Users">
+            <EntityTypeMapping TypeName="productmanagementModel.Tbl_Users">
+              <MappingFragment StoreEntitySet="Tbl_Users">
+                <ScalarProperty Name="User_Image" ColumnName="User_Image" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_Password" ColumnName="User_Password" />
+                <ScalarProperty Name="User_Email" ColumnName="User_Email" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Category">
+            <EntityTypeMapping TypeName="productmanagementModel.Tbl_Category">
+              <MappingFragment StoreEntitySet="Tbl_Category">
+                <ScalarProperty Name="C_Fkey_Uid" ColumnName="C_Fkey_Uid" />
+                <ScalarProperty Name="C_Name" ColumnName="C_Name" />
+                <ScalarProperty Name="C_Id" ColumnName="C_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Products">
+            <EntityTypeMapping TypeName="productmanagementModel.Tbl_Products">
+              <MappingFragment StoreEntitySet="Tbl_Products">
+                <ScalarProperty Name="P_Fkey_Cid" ColumnName="P_Fkey_Cid" />
+                <ScalarProperty Name="P_LImage" ColumnName="P_LImage" />
+                <ScalarProperty Name="P_SImage" ColumnName="P_SImage" />
+                <ScalarProperty Name="P_Long_Description" ColumnName="P_Long_Description" />
+                <ScalarProperty Name="P_Short_Description" ColumnName="P_Short_Description" />
+                <ScalarProperty Name="P_Qty" ColumnName="P_Qty" />
+                <ScalarProperty Name="P_Price" ColumnName="P_Price" />
+                <ScalarProperty Name="P_Name" ColumnName="P_Name" />
+                <ScalarProperty Name="P_Id" ColumnName="P_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
